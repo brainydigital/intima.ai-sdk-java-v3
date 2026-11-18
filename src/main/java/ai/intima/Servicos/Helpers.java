@@ -1,7 +1,7 @@
 package ai.intima.Servicos;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public final class Helpers {
     public static List<Map<String, Object>> definirMultiPart(Map<String, Object> params) {
         List<Map<String, Object>> parts = new ArrayList<>();
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            Map<String, Object> part = new HashMap<>();
+            Map<String, Object> part = new LinkedHashMap<>();
             part.put("name", entry.getKey());
             part.put("contents", entry.getValue());
             parts.add(part);

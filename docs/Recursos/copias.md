@@ -50,7 +50,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idCopia = 1; // ID da cópia no Intima.ai
+    String idCopia = "1"; // ID da cópia no Intima.ai
 
     CopiaBusca copia = new CopiaBusca(idCopia);
 
@@ -76,7 +76,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     CopiaSolicitacao copia = new CopiaSolicitacao(idAutenticador, numeroDoProcesso);
@@ -92,5 +92,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-cópias)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

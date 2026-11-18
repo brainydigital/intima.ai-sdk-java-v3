@@ -53,7 +53,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idCertificado = 1; // ID do certificado no Intima.ai
+    String idCertificado = "1"; // ID do certificado no Intima.ai
 
     CertificadoBusca certificado = new CertificadoBusca(idCertificado);
 
@@ -80,12 +80,11 @@ import ai.intima.Intimai;
 import ai.intima.Modelos.Certificado;
 import ai.intima.Servicos.SolicitarCadastro.Certificado.CertificadoSolicitacaoCadastro;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    Certificado modelCertificado = new Certificado(Path.of("caminho/do/certificado"), "senha");
+    Certificado modelCertificado = new Certificado("caminho/do/certificado", "senha");
 
     CertificadoSolicitacaoCadastro certificado = new CertificadoSolicitacaoCadastro(modelCertificado);
 
@@ -108,14 +107,13 @@ import ai.intima.Intimai;
 import ai.intima.Modelos.Certificado;
 import ai.intima.Servicos.SolicitarAtualizacao.Certificado.CertificadoSolicitaAtualizacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idCertificado = 1; // ID do certificado no Intima.ai
+    String idCertificado = "1"; // ID do certificado no Intima.ai
 
-    Certificado modelCertificado = new Certificado(Path.of("caminho/do/certificado"), "senha");
+    Certificado modelCertificado = new Certificado("caminho/do/certificado", "senha");
 
     CertificadoSolicitaAtualizacao certificado = new CertificadoSolicitaAtualizacao(
         idCertificado,
@@ -144,7 +142,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idCertificado = 1; // ID do certificado no Intima.ai
+    String idCertificado = "1"; // ID do certificado no Intima.ai
 
     CertificadoSolicitacaoExclusao certificado = new CertificadoSolicitacaoExclusao(idCertificado);
 
@@ -159,5 +157,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-certificados)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

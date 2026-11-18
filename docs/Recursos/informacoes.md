@@ -50,7 +50,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idInformacao = 1; // ID da informação no Intima.ai
+    String idInformacao = "1"; // ID da informação no Intima.ai
 
     InformacaoBusca informacao = new InformacaoBusca(idInformacao);
 
@@ -76,7 +76,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     InformacaoSolicitacao informacao = new InformacaoSolicitacao(
@@ -95,5 +95,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-informações)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

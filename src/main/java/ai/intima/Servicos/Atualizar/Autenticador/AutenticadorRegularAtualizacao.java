@@ -1,6 +1,6 @@
 package ai.intima.Servicos.Atualizar.Autenticador;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import ai.intima.Servicos.Atualizar.ServicoAtualizacao;
 import ai.intima.Servicos.Endpoint;
@@ -9,23 +9,33 @@ public class AutenticadorRegularAtualizacao implements ServicoAtualizacao {
     private final String id;
     private final String usuario;
     private final String senha;
+    private final String idCertificado;
 
-    public AutenticadorRegularAtualizacao(String id, String usuario, String senha) {
+    public AutenticadorRegularAtualizacao(String id, String usuario, String senha, String idCertificado) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
+        this.idCertificado = idCertificado;
     }
 
-    public AutenticadorRegularAtualizacao(String id) { this(id, null, null); }
+    public AutenticadorRegularAtualizacao(String id, String usuario, String senha) {
+        this(id, usuario, senha, null);
+    }
+
+    public AutenticadorRegularAtualizacao(String id) { this(id, null, null, null); }
 
     @Override
     public String getEndpoint() { return Endpoint.AUTENTICADOR + Endpoint.REGULAR + "/" + id + Endpoint.ATUALIZAR; }
 
     @Override
     public Map<String, Object> getRequest() {
-        Map<String, Object> request = new HashMap<>();
-        request.put("usuario", usuario);
-        request.put("senha", senha);
+        Map<String, Object> formParams = new LinkedHashMap<>();
+        formParams.put("usuario", usuario);
+        formParams.put("senha", senha);
+        formParams.put("certificado_id", idCertificado);
+
+        Map<String, Object> request = new LinkedHashMap<>();
+        request.put("form_params", formParams);
         return request;
     }
 }

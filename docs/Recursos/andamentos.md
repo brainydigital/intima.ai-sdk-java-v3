@@ -46,7 +46,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAndamento = 1; // ID do andamento no Intima.ai
+    String idAndamento = "1"; // ID do andamento no Intima.ai
 
     AndamentoBusca andamento = new AndamentoBusca(idAndamento);
 
@@ -72,7 +72,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1;
+    String idAutenticador = "1";
     String numeroProcesso = "00000000000000000000";
 
     AndamentoCadastro andamento = new AndamentoCadastro(idAutenticador, numeroProcesso);
@@ -99,7 +99,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAndamento = 1;
+    String idAndamento = "1";
 
     AndamentoSolicitacao andamento = new AndamentoSolicitacao(idAndamento);
 
@@ -125,7 +125,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAndamento = 1; // ID do andamento no Intima.ai
+    String idAndamento = "1"; // ID do andamento no Intima.ai
 
     AndamentoResultado andamento = new AndamentoResultado(idAndamento);
 
@@ -151,7 +151,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int id = 1;
+    String id = "1";
 
     AndamentoExclusao andamento = new AndamentoExclusao(id);
 
@@ -166,5 +166,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-andamentos)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

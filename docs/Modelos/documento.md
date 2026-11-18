@@ -4,23 +4,15 @@ Você pode instanciar um documento, utilizado em métodos em que o mesmo é nece
 
 ```java
 import ai.intima.Modelos.Documento;
-import java.nio.file.Path;
 
-// Usando java.nio.file.Path:
 Documento documento = new Documento(
-    Path.of("caminho/do/documento"),
+    "caminho/do/documento.pdf",
     1,           // Ordem (primeiro, segundo, terceiro...) de processamento/envio
-    32,          // Tipo do documento. Opcional (depende do tribunal)
-    "descricao"  // Opcional
+    "32",        // Tipo do documento. Opcional (depende do tribunal), pode ser null
+    "descricao"  // Opcional, pode ser null
 );
 
-// Ou usando String diretamente:
-Documento documento = new Documento(
-    "caminho/do/documento",
-    1,           // Ordem (primeiro, segundo, terceiro...) de processamento/envio
-    32,          // Tipo do documento. Opcional (depende do tribunal)
-    "descricao"  // Opcional
-);
+Documento semTipo = new Documento("caminho/do/outro-documento.pdf", 2);
 ```
 
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

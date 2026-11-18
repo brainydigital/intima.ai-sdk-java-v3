@@ -5,10 +5,22 @@
 
   <groupId>ai.intima</groupId>
   <artifactId>intimaai-sdk-v3-java</artifactId>
-  <version>3.0.0</version>
+  <version>3.1.0</version>
   <packaging>jar</packaging>
   <name>Intima.ai - SDK V3 Java</name>
   <url>https://app.intima.ai</url>
+
+  <organization>
+    <name>BrainyDigital</name>
+    <url>https://intima.ai</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>BrainyDigital</name>
+      <email>contato@brainydigital.com.br</email>
+    </developer>
+  </developers>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
@@ -41,6 +53,11 @@
         <configuration>
           <release>17</release>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
       </plugin>
     </plugins>
   </build>

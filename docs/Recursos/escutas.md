@@ -48,7 +48,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idEscuta = 1; // ID da escuta no Intima.ai
+    String idEscuta = "1"; // ID da escuta no Intima.ai
 
     EscutaBusca escuta = new EscutaBusca(idEscuta);
 
@@ -79,7 +79,7 @@ try {
     Intimai intimai = new Intimai("api_token");
 
     // ID do autenticador no Intima.ai
-    int idAutenticador = 1;
+    String idAutenticador = "1";
 
     // Número do processo no tribunal
     String numeroDoProcesso = "00000000000000000000";
@@ -87,7 +87,7 @@ try {
     // Dias no qual a captura será realizada
     List<Integer> diasDeCaptura = Arrays.asList(Dia.SEGUNDA_FEIRA, Dia.SEXTA_FEIRA);
 
-    // Horários no qual a captura será realizada
+    // Horários no qual a captura será realizada (no máximo 3, de 01:00 a 23:00)
     List<String> horariosDeCaptura = Arrays.asList(Horario.DEZ_HORAS, Horario.DEZOITO_HORAS);
 
     EscutaCadastro escuta = new EscutaCadastro(
@@ -119,7 +119,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idEscuta = 1; // ID da escuta no Intima.ai
+    String idEscuta = "1"; // ID da escuta no Intima.ai
 
     EscutaSolicitacao escuta = new EscutaSolicitacao(idEscuta);
 
@@ -145,7 +145,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idEscuta = 1; // ID da escuta no Intima.ai
+    String idEscuta = "1"; // ID da escuta no Intima.ai
 
     EscutaResultado escuta = new EscutaResultado(idEscuta);
 
@@ -175,12 +175,12 @@ import java.util.List;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idEscuta = 1; // ID da escuta no Intima.ai
+    String idEscuta = "1"; // ID da escuta no Intima.ai
 
     // Dias no qual a captura será realizada
     List<Integer> diasDeCaptura = Arrays.asList(Dia.SEGUNDA_FEIRA, Dia.SEXTA_FEIRA);
 
-    // Horários no qual a captura será realizada
+    // Horários no qual a captura será realizada (no máximo 3, de 01:00 a 23:00)
     List<String> horariosDeCaptura = Arrays.asList(Horario.DEZ_HORAS, Horario.DEZOITO_HORAS);
 
     EscutaAtualizacao escuta = new EscutaAtualizacao(
@@ -211,7 +211,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idEscuta = 1; // ID da escuta no Intima.ai
+    String idEscuta = "1"; // ID da escuta no Intima.ai
 
     EscutaExclusao escuta = new EscutaExclusao(idEscuta);
 
@@ -226,5 +226,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-escutas)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

@@ -4,21 +4,14 @@ Você pode instanciar uma petição, utilizada em métodos em que a mesma é nec
 
 ```java
 import ai.intima.Modelos.Peticao;
-import java.nio.file.Path;
 
-// Usando java.nio.file.Path:
 Peticao peticao = new Peticao(
-    Path.of("caminho/da/peticao"),
-    32,          // Tipo do documento. Opcional (depende do tribunal)
-    "descricao"  // Opcional
+    "caminho/da/peticao.pdf",
+    "32",        // Tipo do documento. Opcional (depende do tribunal), pode ser null
+    "descricao"  // Opcional, pode ser null
 );
 
-// Ou usando String diretamente:
-Peticao peticao = new Peticao(
-    "caminho/da/peticao",
-    32,          // Tipo do documento. Opcional (depende do tribunal)
-    "descricao"  // Opcional
-);
+Peticao semTipo = new Peticao("caminho/da/outra-peticao.pdf");
 ```
 
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

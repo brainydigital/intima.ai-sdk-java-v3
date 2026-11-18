@@ -56,7 +56,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idTribunal = 1; // ID do tribunal no Intima.ai
+    String idTribunal = "1"; // ID do tribunal no Intima.ai
 
     TribunalBusca tribunal = new TribunalBusca(idTribunal);
 
@@ -71,5 +71,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-tribunais)
-[Voltar à lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar à lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

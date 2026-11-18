@@ -9,10 +9,10 @@ import ai.intima.Modelos.ParteVinculada;
 ParteVinculada parteVinculada = new ParteVinculada("nome-parte-vinculada");
 
 // Com participação (opcional, depende do tribunal):
-ParteVinculada parteVinculada = new ParteVinculada(
+ParteVinculada comParticipacao = new ParteVinculada(
     "nome-parte-vinculada",
-    "participacao" // Opcional (depende do tribunal)
+    "participacao"
 );
 ```
 
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

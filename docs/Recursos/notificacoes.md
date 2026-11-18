@@ -53,7 +53,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoEmail = 1; // ID da notificação por email no Intima.ai
+    String idNotificacaoEmail = "1"; // ID da notificação por email no Intima.ai
 
     NotificacaoEmailBusca notificacaoEmail = new NotificacaoEmailBusca(idNotificacaoEmail);
 
@@ -105,7 +105,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoEmail = 1; // ID da notificação por email no Intima.ai
+    String idNotificacaoEmail = "1"; // ID da notificação por email no Intima.ai
     String novoEmail = "email-novo@exemplo.com";
 
     NotificacaoEmailAtualizacao notificacaoEmail = new NotificacaoEmailAtualizacao(
@@ -135,7 +135,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoEmail = 1; // ID da notificação por email no Intima.ai
+    String idNotificacaoEmail = "1"; // ID da notificação por email no Intima.ai
 
     NotificacaoEmailExclusao notificacaoEmail = new NotificacaoEmailExclusao(idNotificacaoEmail);
 
@@ -195,7 +195,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoWebhook = 1; // ID da notificação por webhook no Intima.ai
+    String idNotificacaoWebhook = "1"; // ID da notificação por webhook no Intima.ai
 
     NotificacaoWebhookBusca notificacaoWebhook = new NotificacaoWebhookBusca(idNotificacaoWebhook);
 
@@ -222,7 +222,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int tipoAcao = Acao.TIPO_COPIA;
+    String tipoAcao = String.valueOf(Acao.TIPO_COPIA);
     String verboHttp = "GET";
     String url = "url-exemplo.com";
 
@@ -255,8 +255,8 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoWebhook = 1; // ID da notificação por webhook no Intima.ai
-    int novoTipoAcao = Acao.TIPO_INFORMACAO;
+    String idNotificacaoWebhook = "1"; // ID da notificação por webhook no Intima.ai
+    String novoTipoAcao = String.valueOf(Acao.TIPO_INFORMACAO);
     String novoVerboHttp = "POST";
     String novaUrl = "nova-url-exemplo.com";
 
@@ -289,7 +289,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idNotificacaoWebhook = 1; // ID da notificação por webhook no Intima.ai
+    String idNotificacaoWebhook = "1"; // ID da notificação por webhook no Intima.ai
 
     NotificacaoWebhookExclusao notificacaoWebhook = new NotificacaoWebhookExclusao(idNotificacaoWebhook);
 
@@ -304,5 +304,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-notificações)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

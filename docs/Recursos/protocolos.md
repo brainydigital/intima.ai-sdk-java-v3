@@ -54,7 +54,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocolo = 1; // ID do protocolo no Intima.ai
+    String idProtocolo = "1"; // ID do protocolo no Intima.ai
 
     ProtocoloBusca protocolo = new ProtocoloBusca(idProtocolo);
 
@@ -78,29 +78,29 @@ Protocolos no sistema PJE são realizados em uma única etapa.
 import ai.intima.Intimai;
 import ai.intima.Modelos.Peticao;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloPjeSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.PJE.ProtocoloPjeSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     // Estes tipos estão disponíveis no tribunal em questão, você pode buscar o tribunal e verificar os valores disponíveis.
-    int tipoDocumentoMensagemGeral = 1;
+    String tipoDocumentoMensagemGeral = "1";
 
-    // A petição é necessária para alguns tribunais (TRT por exemplo). Obs: você pode buscar os tipos disponíveis da petição ao buscar o tribunal em que se está protocolando
-    Peticao peticao = new Peticao(Path.of("caminho/da/peticao"), 12, "descricao-peticao");
+    // A petição é obrigatória nos tribunais da Justiça do Trabalho (TRT) e proibida nos demais: fora do TRT, passe null e envie tudo em documentos.
+    // Obs: você pode buscar os tipos disponíveis da petição ao buscar o tribunal em que se está protocolando
+    Peticao peticao = new Peticao("caminho/da/peticao", "12", "descricao-peticao");
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
 
-    // Obs: se o tribunal não precisar da petição basta não enviar
+    // Obs: fora do TRT, use null no lugar de peticao
     ProtocoloPjeSolicitacao protocolo = new ProtocoloPjeSolicitacao(
         idAutenticador,
         numeroDoProcesso,
@@ -123,26 +123,47 @@ try {
 
 Protocolos no sistema PROJUDI são realizados em uma única etapa.
 
+Antes de protocolar, busque os tipos de documento mensagem geral disponíveis para o autenticador. A API responde 422 se o autenticador não for do PROJUDI e 404 se o tribunal não tiver nenhum tipo.
+
+```java
+import ai.intima.Intimai;
+import ai.intima.Servicos.Buscar.Protocolo.TipoDocumentoMensagemGeral.TipoDocumentoMensagemGeralProjudiBusca;
+import ai.intima.Exceptions.APIRequestException;
+
+try {
+    Intimai intimai = new Intimai("api_token");
+
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
+
+    Object resultado = intimai.servicos.buscar(new TipoDocumentoMensagemGeralProjudiBusca(idAutenticador));
+
+    System.out.println(resultado);
+} catch (APIRequestException e) {
+    System.out.println(e.getStatus() + " " + e.getMensagem());
+}
+```
+
+Depois, solicite o protocolo:
+
 ```java
 import ai.intima.Intimai;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloProjudiSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.PROJUDI.ProtocoloProjudiSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
-    // Estes tipos estão disponíveis no tribunal em questão, você pode buscar o tribunal e verificar os valores disponíveis.
-    int tipoDocumentoMensagemGeral = 1;
+    // Um dos tipos devolvidos por TipoDocumentoMensagemGeralProjudiBusca
+    String tipoDocumentoMensagemGeral = "1";
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
 
     ProtocoloProjudiSolicitacao protocolo = new ProtocoloProjudiSolicitacao(
@@ -173,13 +194,13 @@ o id do autenticador (contendo o tribunal referente ao número do processo).
 
 ```java
 import ai.intima.Intimai;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloEsajPrimeiroPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.ESAJ.ProtocoloEsajPrimeiroPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     ProtocoloEsajPrimeiroPassoSolicitacao primeiraEtapa = new ProtocoloEsajPrimeiroPassoSolicitacao(
@@ -211,30 +232,29 @@ import ai.intima.Intimai;
 import ai.intima.Modelos.ParteVinculada;
 import ai.intima.Modelos.Peticao;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloEsajSegundoPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.ESAJ.ProtocoloEsajSegundoPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocolo = 1; // ID do protocolo no Intima.ai
+    String idProtocolo = "1"; // ID do protocolo no Intima.ai
 
     // O id da classe pode ser obtido verificando as classes disponíveis ao buscar todas as classes
-    int idClasse = 1;
+    String idClasse = "1";
 
     // O id da categoria pode ser obtido verificando as classes e categorias disponíveis ao buscar todas as classes
-    int idCategoria = 1;
+    String idCategoria = "1";
 
     // Array com as partes. Obs: a parte pode ter participação, verifique no tribunal
     List<ParteVinculada> partesVinculadas = Arrays.asList(new ParteVinculada("nome-parte"));
 
-    Peticao peticao = new Peticao(Path.of("caminho/da/peticao"), 12, "descricao-peticao");
+    Peticao peticao = new Peticao("caminho/da/peticao", "12", "descricao-peticao");
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
 
     ProtocoloEsajSegundoPassoSolicitacao segundaEtapa = new ProtocoloEsajSegundoPassoSolicitacao(
@@ -267,13 +287,13 @@ o id do autenticador (contendo o tribunal referente ao número do processo).
 
 ```java
 import ai.intima.Intimai;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloEprocPrimeiroPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.EPROC.ProtocoloEprocPrimeiroPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     ProtocoloEprocPrimeiroPassoSolicitacao primeiraEtapa = new ProtocoloEprocPrimeiroPassoSolicitacao(
@@ -304,25 +324,24 @@ comprovante de protocolo.
 import ai.intima.Intimai;
 import ai.intima.Modelos.ParteVinculada;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloEprocSegundoPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.EPROC.ProtocoloEprocSegundoPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocolo = 1; // ID do protocolo no Intima.ai
+    String idProtocolo = "1"; // ID do protocolo no Intima.ai
 
     // Estes tipos estão disponíveis no protocolo, você pode buscar o protocolo e verificar os valores disponíveis.
-    int tipoDocumentoMensagemGeral = 1;
+    String tipoDocumentoMensagemGeral = "1";
 
     // Array com as partes. Obs: a parte pode ter participação, verifique no tribunal
     List<ParteVinculada> partesVinculadas = Arrays.asList(new ParteVinculada("nome-parte"));
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
 
     ProtocoloEprocSegundoPassoSolicitacao segundaEtapa = new ProtocoloEprocSegundoPassoSolicitacao(
@@ -353,13 +372,13 @@ o id do autenticador (contendo o tribunal referente ao número do processo).
 
 ```java
 import ai.intima.Intimai;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloTjrjPrimeiroPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.TJRJ.ProtocoloTjrjPrimeiroPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     ProtocoloTjrjPrimeiroPassoSolicitacao primeiraEtapa = new ProtocoloTjrjPrimeiroPassoSolicitacao(
@@ -391,35 +410,38 @@ import ai.intima.Intimai;
 import ai.intima.Modelos.ParteVinculada;
 import ai.intima.Modelos.Peticao;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.Protocolo.ProtocoloTjrjSegundoPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.Protocolo.TJRJ.ProtocoloTjrjSegundoPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocolo = 1; // ID do protocolo no Intima.ai
+    String idProtocolo = "1"; // ID do protocolo no Intima.ai
 
     // O id da classe pode ser obtido verificando as classes disponíveis ao buscar todas as classes
-    int idClasse = 1;
+    String idClasse = "1";
 
     // Array com as partes. Obs: a parte pode ter participação, verifique no tribunal
     List<ParteVinculada> partesVinculadas = Arrays.asList(new ParteVinculada("nome-parte"));
 
-    Peticao peticao = new Peticao(Path.of("caminho/da/peticao"), 12, "descricao-peticao");
+    Peticao peticao = new Peticao("caminho/da/peticao", "12", "descricao-peticao");
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
+
+    // Obrigatório quando a classe escolhida tem categorias (veja as classes do protocolo)
+    String idCategoria = null;
 
     ProtocoloTjrjSegundoPassoSolicitacao segundaEtapa = new ProtocoloTjrjSegundoPassoSolicitacao(
         idProtocolo,
         idClasse,
         partesVinculadas,
         peticao,
-        documentos
+        documentos,
+        idCategoria
     );
 
     Object resultado = intimai.servicos.solicitar(segundaEtapa);
@@ -433,5 +455,5 @@ try {
 ```
 
 [Voltar ao topo](#recurso-protocolos)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

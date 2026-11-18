@@ -62,7 +62,7 @@ import ai.intima.Exceptions.APIRequestException;
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocoloHabilitacao = 1; // ID do protocolo de habilitação no Intima.ai
+    String idProtocoloHabilitacao = "1"; // ID do protocolo de habilitação no Intima.ai
 
     ProtocoloHabilitacaoBusca protocoloHabilitacao = new ProtocoloHabilitacaoBusca(idProtocoloHabilitacao);
 
@@ -87,13 +87,13 @@ o id do autenticador (contendo o tribunal referente ao número do processo).
 
 ```java
 import ai.intima.Intimai;
-import ai.intima.Servicos.Solicitar.ProtocoloHabilitacao.ProtocoloHabilitacaoPjePrimeiroPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.ProtocoloHabilitacao.PJE.ProtocoloHabilitacaoPjePrimeiroPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idAutenticador = 1; // ID do autenticador no Intima.ai
+    String idAutenticador = "1"; // ID do autenticador no Intima.ai
     String numeroDoProcesso = "00000000000000000000"; // Número do processo no tribunal
 
     ProtocoloHabilitacaoPjePrimeiroPassoSolicitacao primeiraEtapa = new ProtocoloHabilitacaoPjePrimeiroPassoSolicitacao(
@@ -129,37 +129,37 @@ import ai.intima.Utilidades.TipoDeclaracao;
 import ai.intima.Utilidades.Polo;
 import ai.intima.Modelos.ParteVinculada;
 import ai.intima.Modelos.Documento;
-import ai.intima.Servicos.Solicitar.ProtocoloHabilitacao.ProtocoloHabilitacaoPjeSegundoPassoSolicitacao;
+import ai.intima.Servicos.Solicitar.ProtocoloHabilitacao.PJE.ProtocoloHabilitacaoPjeSegundoPassoSolicitacao;
 import ai.intima.Exceptions.APIRequestException;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 try {
     Intimai intimai = new Intimai("api_token");
 
-    int idProtocoloHabilitacao = 1; // ID do protocolo de habilitação no Intima.ai
+    String idProtocoloHabilitacao = "1"; // ID do protocolo de habilitação no Intima.ai
 
     // Estes tipos estão disponíveis no enum TipoSolicitacao
     int tipoSolicitacao = TipoSolicitacao.HABILITACAO_SIMPLES;
 
-    // Estes tipos estão disponíveis no enum TipoDeclaracao
+    // Estes tipos estão disponíveis no enum TipoDeclaracao (constantes TRT_* para a Justiça do Trabalho)
     int tipoDeclaracao = TipoDeclaracao.DECLARACAO_SOB_PENA_DE_LEI;
 
     // Estes polos estão disponíveis no enum Polo
     int polo = Polo.ATIVO;
 
-    // Array com as partes. Obs: a parte pode ter participação, verifique no tribunal
-    List<ParteVinculada> partesVinculadas = Arrays.asList(new ParteVinculada("nome-parte"));
+    // Partes do polo escolhido: use o "nome" de cada parte em extra.processo_polos (polo_ativo ou polo_passivo)
+    // do protocolo de habilitação. Aceita ParteVinculada ou o nome direto.
+    List<Object> partesVinculadas = Arrays.asList(new ParteVinculada("nome-parte"), "outra-parte");
 
     // Estes tipos estão disponíveis no protocolo; você pode buscar o protocolo e verificar os valores disponíveis.
-    int tipoDocumentoMensagemGeral = 1;
+    String tipoDocumentoMensagemGeral = "1";
 
-    String descricao = "Descrição da solicitação";
-    String mensagemGeral = "Mensagem geral do protocolo";
+    String descricao = "Descrição da solicitação"; // Opcional, pode ser null
+    String mensagemGeral = "Mensagem geral do protocolo"; // Opcional, pode ser null
 
     List<Documento> documentos = Arrays.asList(
-        new Documento(Path.of("caminho/do/documento"), 1, 21, "descricao-doc")
+        new Documento("caminho/do/documento", 1, "21", "descricao-doc")
     );
 
     ProtocoloHabilitacaoPjeSegundoPassoSolicitacao segundaEtapa = new ProtocoloHabilitacaoPjeSegundoPassoSolicitacao(
@@ -187,5 +187,5 @@ try {
 ---
 
 [Voltar ao topo](#recurso-protocolos-de-habilitação)
-[Voltar à lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar à lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)

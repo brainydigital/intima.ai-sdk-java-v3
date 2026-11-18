@@ -55,4 +55,14 @@ public final class Endpoint {
     public static final String CLASSES = "/classes";
     public static final String EVENTOS = "/eventos";
     public static final String TIPOS_DOCUMENTO_MENSAGEM_GERAL = "/tipos-documento-mensagem-geral";
+    public static final String CONFIRMAR_CONSULTA = "/confirmar-consulta";
+    public static final String CANCELAR_CONSULTA = "/cancelar-consulta";
+    public static final String ATUALIZAR_PERFIL = "/atualizar-perfil";
+    public static final String CAPTURAR_INTIMACOES = "/capturar-intimacoes";
+    public static final String HABILITAR = "/habilitar";
+    public static final String DESABILITAR = "/desabilitar";
+    public static final String DOIS_FATORES = "/2fa/armazenar";
+    public static final String CONSUMO_MENSAL = "/consumo-mensal";
+    public static final String CAPTURA_AGENDADA = "/captura-agendada";
+    public static final String CODIGO_AJUDA = "/codigo-ajuda";
 }

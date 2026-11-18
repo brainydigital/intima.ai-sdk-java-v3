@@ -78,6 +78,29 @@ try {
 }
 ```
 
+### Consumo mensal
+
+Exemplo para buscar o consumo de créditos de um mês, agrupado por tipo de ação. O filtro `date` usa o formato `YYYY-MM`; sem ele, a API usa o mês atual.
+
+```java
+import ai.intima.Intimai;
+import ai.intima.Servicos.Buscar.Credito.CreditoConsumoMensalBusca;
+import ai.intima.Exceptions.APIRequestException;
+import java.util.Map;
+
+try {
+    Intimai intimai = new Intimai("api_token");
+
+    Object resultado = intimai.servicos.buscar(new CreditoConsumoMensalBusca(), 1, Map.of("date", "2026-10"));
+
+    System.out.println(resultado);
+} catch (APIRequestException e) {
+    System.out.println(e.toJson());
+} catch (Exception e) {
+    System.out.println(e.getMessage());
+}
+```
+
 [Voltar ao topo](#recurso-créditos)
-[Voltar a lista da API](../../README.md#documentação-para-os-endpoints-da-api)
-[Voltar para o README](../../README.md#intimaai---sdk-v3-java)
+[Voltar a lista da API](../../README.md#recursos)
+[Voltar para o README](../../README.md#intimaai--sdk-v3-java)
